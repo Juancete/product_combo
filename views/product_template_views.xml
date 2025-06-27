@@ -1,0 +1,24 @@
+<!-- product_combo/views/product_template_views.xml -->
+<odoo>
+  <record id="product_template_form_inherit_combo" model="ir.ui.view">
+    <field name="name">product.template.form.combo</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_form_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//page[@name='variants']" position="after">
+        <page string="Componentes" attrs="{'invisible': [('is_combo','=',False)]}">
+          <group>
+            <field name="combo_line_ids">
+              <tree editable="bottom">
+                <field name="product_id"/>
+                <field name="qty"/>
+              </tree>
+            </field>
+          </group>
+        </page>
+        <!-- Muestra el checkbox justo antes de variantes -->
+        <field name="is_combo" position="before"/>
+      </xpath>
+    </field>
+  </record>
+</odoo>

@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_product_combo_line","access_product_combo_line","model_product_combo_line","base.group_user",1,1,1,1
+"access_sale_order_line_combo","access_sale_order_line_combo","model_sale_order_line_combo","base.group_user",1,1,1,1
+"access_account_move_line_combo","access_account_move_line_combo","model_account_move_line_combo","base.group_user",1,1,1,1
