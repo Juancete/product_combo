@@ -2,13 +2,15 @@
     "name": "Product Combo Extension",
     "version": "18.0.1.0.0",
     "category": "Sales",
+    'author': "Juan Contardo",
     "summary": "Permite modificar componentes de productos combo en Pedidos de Venta y Facturas",
-    "depends": ["product", "sale", "account"],
+    'description': """
+        Este módulo hereda la vista de combos para agregar un campo de cantidad.
+    """,
+    "depends": ["product"],
     "data": [
         "security/ir.model.access.csv",
-        "views/product_template_views.xml",
-        "views/sale_order_views.xml",
-        "views/account_move_views.xml",
+        "views/product_combo_views_inherit.xml",
     ],
     "installable": True,
     "application": False,
