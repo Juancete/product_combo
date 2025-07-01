@@ -7,18 +7,20 @@
     'description': """
         Este módulo hereda la vista de combos para agregar un campo de cantidad.
     """,
-    "depends": ["base", "product", "product_combo", "sale"]
+    "depends": ["base", "product", "sale"],
     "data": [
         "security/ir.model.access.csv",
         "views/product_combo_views_inherit.xml",
-        "static/src/xml/combo_configurator_dialog_view_inherit.xml"
         "views/combo_configurator_inherit.xml",
     ],
-    'assets': { # Esta sección es para los archivos JavaScript y otros assets
+    'assets': {
         'web.assets_backend': [
-            "tu_modulo_custom/static/src/js/combo_configurator_dialog_extension.js",
-            # Puedes añadir tus archivos CSS si los tienes:
-            # 'tu_modulo_custom/static/src/scss/my_custom_styles.scss',
+            # Your JavaScript file for patching the component
+            'static/src/js/combo_configurator_dialog_extension.js',
+            # Your QWeb template inheritance file MUST be here
+            'static/src/xml/combo_configurator_dialog_view_inherit.xml',
+            # Add any other frontend assets (like CSS) here
+            # 'product_combo/static/src/scss/my_custom_styles.scss',
         ],
     },
     "installable": True,

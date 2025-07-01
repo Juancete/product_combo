@@ -2,11 +2,10 @@
 <templates xml:space="preserve">
     <template id="sale_combo_configurator_dialog_inherit_quantity"
               inherit_id="sale.ComboConfiguratorDialog">
-
         <xpath expr="//t[@t-foreach='combo.combo_items']/ProductCard" position="replace">
             <div t-if="getSelectedOrProvidedComboItem(combo.id, comboItem).product" class="o_combo_item_container">
                 <ProductCard
-                    product="getSelectedOrProvidedComboItem(combo.id, comboItem).product"
+                    product="getSelectedOrProvidedOrSelectedComboItem(combo.id, comboItem).product"
                     extraPrice="comboItem.extra_price"
                     onClick="() => this.selectComboItem(combo.id, comboItem)"
                     isSelected="state.selectedComboItems.get(combo.id)?.id === comboItem.id"
