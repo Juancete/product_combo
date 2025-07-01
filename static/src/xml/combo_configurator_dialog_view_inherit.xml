@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <template id="sale_combo_configurator_dialog_inherit_quantity"
+              inherit_id="sale.ComboConfiguratorDialog">
+
+        <xpath expr="//t[@t-foreach='combo.combo_items']/ProductCard" position="replace">
+            <div t-if="getSelectedOrProvidedComboItem(combo.id, comboItem).product" class="o_combo_item_container">
+                <ProductCard
+                    product="getSelectedOrProvidedComboItem(combo.id, comboItem).product"
+                    extraPrice="comboItem.extra_price"
+                    onClick="() => this.selectComboItem(combo.id, comboItem)"
+                    isSelected="state.selectedComboItems.get(combo.id)?.id === comboItem.id"
+                />
+                <div class="d-flex justify-content-center align-items-center mt-2"
+                     t-if="state.selectedComboItems.get(combo.id)?.id === comboItem.id">
+                    <button class="btn btn-sm btn-light border"
+                            t-on-click="() => this.setItemQuantity(comboItem.id, getSelectedOrProvidedComboItem(combo.id, comboItem).quantity - 1)"
+                            t-att-disabled="getSelectedOrProvidedComboItem(combo.id, comboItem).quantity <= 1">
+                        -
+                    </button>
+                    <span class="mx-2"
+                          t-out="getSelectedOrProvidedComboItem(combo.id, comboItem).quantity"/>
+                    <button class="btn btn-sm btn-light border"
+                            t-on-click="() => this.setItemQuantity(comboItem.id, getSelectedOrProvidedComboItem(combo.id, comboItem).quantity + 1)">
+                        +
+                    </button>
+                </div>
+            </div>
+            <ProductCard
+                t-else=""
+                product="getSelectedOrProvidedComboItem(combo.id, comboItem).product"
+                extraPrice="comboItem.extra_price"
+                onClick="() => this.selectComboItem(combo.id, comboItem)"
+                isSelected="state.selectedComboItems.get(combo.id)?.id === comboItem.id"
+            />
+        </xpath>
+    </template>
+</templates>

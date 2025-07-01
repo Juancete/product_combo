@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <template id="sale_combo_configurator_dialog_inherit_quantity"
+              inherit_id="sale.ComboConfiguratorDialog">
+        <xpath expr="//t[@t-foreach='combo.combo_items']/ProductCard" position="after">
+            <div class="o_combo_item_quantity_info text-center mt-2">
+                <span t-out="getSelectedOrProvidedComboItem(combo.id, comboItem).quantity"/> <span class="ms-1">units</span> </div>
+        </xpath>
+    </template>
+</templates>
