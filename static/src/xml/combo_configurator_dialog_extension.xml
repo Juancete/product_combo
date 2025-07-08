@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t  t-name="product_combo.ComboConfiguratorQuantity" 
+        t-inherit="sale.ComboConfiguratorDialog" 
+        t-inherit-mode="extension"
+        owl="1">
+        <xpath expr="//div[hasclass('combo-item-grid')]" position="after">
+          <span
+              name="sale_combo_cuantity"
+              class="d-inline-block mt-4 mb-3 h4"
+              t-out="combo.quantity"
+          />
+        </xpath>
+    </t>
+</templates>

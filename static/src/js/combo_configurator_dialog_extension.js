@@ -5,32 +5,28 @@ import {
 } from '@sale/js/combo_configurator_dialog/combo_configurator_dialog';
 
 
-patch(ComboConfiguratorDialog.prototype, 'product_combo/ComboConfiguratorDialogExtension', {
+patch(ComboConfiguratorDialog.prototype,{
   setup() {
-    this._super(...arguments);
-    for (const combo of this.props.combos) {
-      const item = this.state.selectedComboItems.get(combo.id) || combo.selectedComboItem;
-      item.quantity = item.quantity || 1;
-      this.state.selectedComboItems.set(combo.id, item);
-    }
+    super.setup(...arguments);
+    // Inicializa quantity sólo en los items que realmente existen
+    this.props.combos.forEach(combo => {
+        // si ya viene (por algún otro patch) lo respeta, sino lo inicializa a 1
+        combo.quantity = combo.quantity || 1;
+    });
   },
-  _onSetComboItemQuantity(comboId, quantity) {
-    const item = this.state.selectedComboItems.get(comboId);
-    if (quantity > 0) {
-      item.quantity = quantity;
-      this.state.selectedComboItems.set(comboId, item);
-    }
-  },
-  async confirm(options) {
-    const combosConCantidad = this._selectedComboItems.map(item => ({
-      ...item,
-      quantity: item.quantity,
-    }));
-    await this.props.save(
-      { ...this._comboProductData, combos: combosConCantidad },
-      combosConCantidad,
-      options
-    );
-    this.props.close();
+  /**
+   * Al confirmar el diálogo, aquí recibes un array de líneas a añadir.
+   * Reemplaza `line.quantity` por `line.quantity * combo.quantity`.
+   */
+  confirm() {
+      const lines = super.confirm(...arguments);
+      // props.combos y this.combos están alineados por índice
+      return lines.map((line, index) => {
+          const combo = this.combos[index];
+          return {
+              ...line,
+              quantity: line.quantity * combo.quantity,
+          };
+      });
   },
 });
