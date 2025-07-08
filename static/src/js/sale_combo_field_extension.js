@@ -1,4 +1,5 @@
 /** @odoo-module **/
+console.log('⚡ patch_product_combo.js cargado ⚡');
 import * as comboModel from '@sale/js/models/product_combo';
 
 const OriginalProductCombo = comboModel.ProductCombo;
@@ -12,5 +13,4 @@ class PatchedProductCombo extends OriginalProductCombo {
     }
 }
 
-// Sobrescribimos la exportación original
 comboModel.ProductCombo = PatchedProductCombo;
