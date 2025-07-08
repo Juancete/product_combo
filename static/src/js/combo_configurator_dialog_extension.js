@@ -8,11 +8,12 @@ import {
 patch(ComboConfiguratorDialog.prototype,{
   setup() {
     super.setup(...arguments);
+    console.log('Parche setup OK', this.props.combos);
     // Inicializa quantity sólo en los items que realmente existen
-    this.props.combos.forEach(combo => {
-        // si ya viene (por algún otro patch) lo respeta, sino lo inicializa a 1
-        combo.quantity = combo.quantity || 1;
-    });
+    // this.props.combos.forEach(combo => {
+    //     // si ya viene (por algún otro patch) lo respeta, sino lo inicializa a 1
+    //     combo.quantity = combo.quantity || 1;
+    // });
   },
   /**
    * Al confirmar el diálogo, aquí recibes un array de líneas a añadir.
