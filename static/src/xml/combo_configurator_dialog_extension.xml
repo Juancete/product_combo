@@ -4,12 +4,29 @@
         t-inherit="sale.ComboConfiguratorDialog" 
         t-inherit-mode="extension"
         owl="1">
-        <xpath expr="//div[hasclass('combo-item-grid')]" position="after">
-          <span
-              name="sale_combo_cuantity"
-              class="d-inline-block mt-4 mb-3 h4"
-              t-out="combo.quantity"
-          />
+        <!-- 1) Envolvemos el <span> del título en un flex container -->
+        <xpath expr="//span[@name='sale_combo_configurator_title']" position="replace">
+            <div class="d-flex align-items-center mb-3">
+                <div name="sale_combo_configurator_name_container" class="d-flex flex-fill">
+                    <span
+                        name="sale_combo_configurator_title"
+                        class="d-inline-block mt-4 mb-3 h4"
+                        t-out="combo.name"
+                    />
+                </div>
+            </div>
+        </xpath>
+        <!-- 2) Insertamos justo después el DIV con flex:1 y text-left -->
+        <!-- <xpath expr="//div[hasclass('combo-item-grid')]" position="before"> -->
+        <xpath expr="//div[@name='sale_combo_configurator_name_container']" position="after">
+          <!-- <div class="flex-fill text-left"> -->
+            <QuantityButtons
+                        quantity="combo.quantity"
+                        setQuantity="quantity => this.setQuantity(combo.id,quantity)"
+                        isMinusButtonDisabled="combo.quantity === 1"
+                        btnClasses="'d-inline-block w-auto'"
+                    />
+            <!-- </div> -->
         </xpath>
     </t>
 </templates>

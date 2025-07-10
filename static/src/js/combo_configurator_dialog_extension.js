@@ -4,30 +4,40 @@ import {
     ComboConfiguratorDialog
 } from '@sale/js/combo_configurator_dialog/combo_configurator_dialog';
 
+class ComboQuantity {
+
+  constructor(comboId,quantity){
+    this.id = comboId;
+    this.quantity = quantity;
+  }
+}
 
 patch(ComboConfiguratorDialog.prototype,{
+
   setup() {
     super.setup(...arguments);
-    console.log('Parche setup OK', this.props.combos);
-    // Inicializa quantity sólo en los items que realmente existen
-    // this.props.combos.forEach(combo => {
-    //     // si ya viene (por algún otro patch) lo respeta, sino lo inicializa a 1
-    //     combo.quantity = combo.quantity || 1;
-    // });
   },
+
   /**
-   * Al confirmar el diálogo, aquí recibes un array de líneas a añadir.
-   * Reemplaza `line.quantity` por `line.quantity * combo.quantity`.
+   * Sets the quantity of this combo product.
+   * @param {Number} comboId id del combo.
+   * @param {Number} quantity The new quantity of this combo product.
    */
-  confirm() {
-      const lines = super.confirm(...arguments);
-      // props.combos y this.combos están alineados por índice
-      return lines.map((line, index) => {
-          const combo = this.combos[index];
-          return {
-              ...line,
-              quantity: line.quantity * combo.quantity,
-          };
-      });
+  async getQuantity(comboId) {
+      // Use up-to-date selected PTAVs and custom values to populate the product configurator.
+      return this.props.itemsQuantity.find(combo => combo.id === comboId).quantity
+      
   },
+
+  /**
+   * Sets the quantity of this combo product.
+   * @param {Number} comboId id del combo.
+   * @param {Number} quantity The new quantity of this combo product.
+   */
+  async setQuantity(comboId, quantity) {
+      // Use up-to-date selected PTAVs and custom values to populate the product configurator.
+      console.log("update " + comboId + " cantidad:" + quantity)
+      this.props.combos.find(combo => combo.id === comboId).quantity = quantity
+      
+  }
 });
