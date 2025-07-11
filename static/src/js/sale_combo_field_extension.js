@@ -1,7 +1,8 @@
 /** @odoo-module **/
 import { patch } from '@web/core/utils/patch';
 import { SaleOrderLineProductField } from '@sale/js/sale_product_field';
-import {  getLinkedSaleOrderLines } from '@sale/js/sale_utils';
+import {  getLinkedSaleOrderLines, serializeComboItem } from '@sale/js/sale_utils';
+import { uuid } from "@web/views/utils";
 import { rpc } from "@web/core/network/rpc";
 import { serializeDateTime } from "@web/core/l10n/dates";
 import { ProductCombo} from '@sale/js/models/product_combo';

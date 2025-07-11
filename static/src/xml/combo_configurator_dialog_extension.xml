@@ -21,9 +21,9 @@
         <xpath expr="//div[@name='sale_combo_configurator_name_container']" position="after">
           <!-- <div class="flex-fill text-left"> -->
             <QuantityButtons
-                        quantity="combo.quantity"
-                        setQuantity="quantity => this.setQuantity(combo.id,quantity)"
-                        isMinusButtonDisabled="combo.quantity === 1"
+                        quantity="comboQuantity.find(comboQuantity=> comboQuantity.id === combo.id).quantity"
+                        setQuantity="quantity => this.setQuantity(combo.id ,quantity)"
+                        isMinusButtonDisabled="comboQuantity.find(comboQuantity=> comboQuantity.id === combo.id).quantity === 1"
                         btnClasses="'d-inline-block w-auto'"
                     />
             <!-- </div> -->
