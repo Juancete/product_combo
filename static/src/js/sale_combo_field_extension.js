@@ -44,7 +44,7 @@ patch(SaleOrderLineProductField.prototype, {
             save: async (comboProductData, selectedComboItems) => {
                 saleOrder.order_line.leaveEditMode();
                 const comboLineValues = {
-                    product_uom_qty: comboProductData.quantity,
+                    product_uom_qty: comboProductData.quantity, // cantidad global
                     selected_combo_items: JSON.stringify(
                         selectedComboItems.map(serializeComboItem)
                     ),
