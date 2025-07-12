@@ -27,7 +27,7 @@ patch(ComboConfiguratorDialog.prototype,{
    * @param {Number} comboId id del combo.
    * @param {Number} quantity The new quantity of this combo product.
    */
-  async setQuantity(comboId, quantity) {
+  async setComboQuantity(comboId, quantity) {
       this.comboQuantity.find(comboQuantity=> comboQuantity.id === comboId).quantity = quantity; 
       
   },

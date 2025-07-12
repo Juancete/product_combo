@@ -22,7 +22,7 @@
           <!-- <div class="flex-fill text-left"> -->
             <QuantityButtons
                         quantity="comboQuantity.find(comboQuantity=> comboQuantity.id === combo.id).quantity"
-                        setQuantity="quantity => this.setQuantity(combo.id ,quantity)"
+                        setQuantity="quantity => this.setComboQuantity(combo.id ,quantity)"
                         isMinusButtonDisabled="comboQuantity.find(comboQuantity=> comboQuantity.id === combo.id).quantity === 1"
                         btnClasses="'d-inline-block w-auto'"
                     />
