@@ -15,11 +15,12 @@ class ComboQuantity {
 patch(ComboConfiguratorDialog.prototype,{
 
   setup() {
-    super.setup(...arguments);
+    super.setup();
     this.comboQuantity = useState([]);
     this.props.combos.forEach(element => {
       this.comboQuantity.push(new ComboQuantity(element.id, element.quantity))  
     });
+
     
   },
   /**
@@ -38,8 +39,28 @@ patch(ComboConfiguratorDialog.prototype,{
    * @return {ProductComboItem[]} The sorted selected combo items.
    */
   get _selectedComboItems() {
-      this.state.selectedComboItems.forEach((item, comboId) => item.quantity = this.comboQuantity.find(comboQuantity=> comboQuantity.id === comboId).quantity )
+      this.state.selectedComboItems.forEach((item, comboId) => item.quantity = this.getSingleComboQuantity(comboId) )
       return super._selectedComboItems
-  }
+  },
+    /**
+     * Return the total price per unit.
+     *
+     * The total price is the sum of:
+     * - The combo product's price,
+     * - The selected combo items' extra price,
+     * - The selected `no_variant` attributes' extra price.
+     *
+     * @return {Number} The total price.
+     */
+    get _comboPrice() {
+        const precioExtra = Array.from(this.state.selectedComboItems.entries()).reduce((acumulador, [comboId, item]) => {
+          return acumulador + item.price * this.getSingleComboQuantity(comboId)
+        }, 0); 
+        return this.state.basePrice + precioExtra;
+    },
+
+    getSingleComboQuantity(comboId){
+      return this.comboQuantity.find(comboQuantity=> comboQuantity.id === comboId).quantity
+    }
 
 });

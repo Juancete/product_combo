@@ -15,3 +15,11 @@ class SaleComboConfiguratorControllerOverride(SaleComboConfiguratorController):
             combo['quantity'] = combo_record.quantity
         
         return result
+
+
+    def _get_combo_item_data(
+        self, combo, combo_item, selected_combo_item, date, currency, pricelist, **kwargs
+    ):
+        result = super()._get_combo_item_data(combo, combo_item, selected_combo_item, date, currency, pricelist, **kwargs)
+        result['product']['price'] = combo_item.lst_price
+        return result

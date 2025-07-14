@@ -15,6 +15,7 @@
     'assets': {
       'web.assets_backend': [
           'sale.assets_backend', # <--- ADD THIS LINE
+          'product_combo/static/src/js/product_combo_item_patch.js',
           'product_combo/static/src/js/patch_sale_utils.js',
           'product_combo/static/src/js/sale_combo_field_extension.js',
           'product_combo/static/src/js/combo_configurator_dialog_extension.js',

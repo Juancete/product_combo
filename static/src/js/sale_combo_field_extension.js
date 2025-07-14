@@ -34,6 +34,9 @@ patch(SaleOrderLineProductField.prototype, {
             combos: combos.map(combo => {
                 const newCombo = new ProductCombo(combo)
                 newCombo.quantity = combo.quantity
+                newCombo.combo_items.forEach(combo_item => {
+                    combo_item.price = combo.combo_items.find( item=> item.product.id === combo_item.product.id).product.price
+                });
                 return newCombo
             }),
             ...remainingData,
