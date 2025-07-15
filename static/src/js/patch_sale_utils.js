@@ -8,6 +8,7 @@ patch(saleUtils, {
         const result = super.serializeComboItem(comboItem);
         // Añadimos la propiedad quantity definida en cada comboItem
         result.quantity = comboItem.quantity;
+        result.price = comboItem.price
         return result;
     },
 });

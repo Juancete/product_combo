@@ -15,21 +15,18 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     def _get_combo_item_display_price(self):
-        _logger.warning("LA CONCHA DE TU MADRES!!")
-        # Reemplazamos cálculo proporcional por suma directa
-        # Suma los valores base y extra de cada ítem
-        price = self.combo_item_id.extra_price
-        # Obtenemos todos los combos del template con su base_price en currency
-        template = self.product_template_id
+        self.ensure_one()
+        # obtenemos la moneda para convertir
         currency = self.order_id.pricelist_id.currency_id
-        prices = []
-        for item in template.combo_ids:
-            base = currency._convert(
-                from_amount=item.base_price,
-                to_currency=self.currency_id,
-                company=self.company_id,
-                date=self.order_id.date_order,
-            )
-            prices.append(base + item.extra_price)
-        # Devolvemos la suma de todos o solo del ítem actual
-        return sum(prices)
+        date = self.order_id.date_order
+        company = self.company_id
+
+        # precio unitario del ítem (base + extra) convertido
+        unit_price = currency._convert(
+            from_amount=self.combo_item_id.lst_price + self.combo_item_id.extra_price,
+            to_currency=self.currency_id,
+            company=company,
+            date=date,
+        )
+        # devolvemos precio total de esa línea: unit_price * qty
+        return unit_price 
