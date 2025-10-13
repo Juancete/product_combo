@@ -7,10 +7,11 @@
         <!-- 1) Envolvemos el <span> del título en un flex container -->
         <xpath expr="//span[@name='sale_combo_configurator_title']" position="replace">
             <div class="d-flex align-items-center mb-3">
-                <div name="sale_combo_configurator_name_container" class="d-flex flex-fill">
+                <div name="sale_combo_configurator_name_container" class="d-flex">
                     <span
                         name="sale_combo_configurator_title"
                         class="d-inline-block mt-4 mb-3 h4"
+                        style="margin-right:1em;"
                         t-out="combo.name"
                     />
                 </div>
@@ -19,14 +20,15 @@
         <!-- 2) Insertamos justo después el DIV con flex:1 y text-left -->
         <!-- <xpath expr="//div[hasclass('combo-item-grid')]" position="before"> -->
         <xpath expr="//div[@name='sale_combo_configurator_name_container']" position="after">
-          <!-- <div class="flex-fill text-left"> -->
+          <div style="display:flex;justify-content:flex-start;">
             <QuantityButtons
                         quantity="comboQuantity.find(comboQuantity=> comboQuantity.id === combo.id).quantity"
                         setQuantity="quantity => this.setComboQuantity(combo.id ,quantity)"
                         isMinusButtonDisabled="comboQuantity.find(comboQuantity=> comboQuantity.id === combo.id).quantity === 1"
-                        btnClasses="'d-inline-block w-auto'"
+                        btnClasses="'d-inline-block'"
                     />
-            <!-- </div> -->
+            <div></div>
+            </div>
         </xpath>
     </t>
 </templates>
